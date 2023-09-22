@@ -1,0 +1,23 @@
+{
+    "name": "frane/bienes-raices-poo",
+    "description": "Proyecto con poo mvc",
+    "type": "proyect",
+    "authors": [
+        {
+            "name": "EdisonFrancisco",
+            "email": "edissonaceror@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Frane\\BienesRaicesPoo\\": "src/",
+            "Model\\": "./models",
+            "MVC\\": "./",
+            "Controllers\\": "./controllers"
+        }
+    },
+
+    "require": {
+        "intervention/image": "^2.7"
+    }
+}
