@@ -15,6 +15,12 @@ class Router {
 
   //registro de rutas que soporta la app
   public function comprobarRutas() {
+    session_start();
+    $auth = $_SESSION['login'] ?? NULL;
+    //arreglo de rutas protegidas
+    $rutasProtegidas = ['/admin', '/propiedades/crear', '/propiedades/actualizar', '/propiedades/eliminar',
+      '/vendedores/crear','/vendedores/actualizar', '/vendedores/eliminar'];
+
     $urlActual = $_SERVER['PATH_INFO'] ?? '/';
     $metodo = $_SERVER['REQUEST_METHOD'];
 
@@ -24,11 +30,15 @@ class Router {
       $fn = $this->rutasPOST[$urlActual] ?? null;
     }
 
+    //proteger las rutas
+    if (in_array($urlActual, $rutasProtegidas) && !$auth) {
+      header('Location: /');
+    }
+
     //la url existe y tiene una funcion asociada
     if ($fn) {
       //permite llamar una funcion cuando no se sabe como se llama la funcion
       call_user_func($fn, $this);
-
     }  else {
       //error 404 no existe la pagina
       echo "pagina no encontrada";
@@ -43,10 +53,10 @@ class Router {
 
     ob_start();//inicia el almacenamiento en memoria por un momento
 
-    include __DIR__ . "/views/$view.php";
+    include_once __DIR__ . "/views/$view.php";
 
     $contenido = ob_get_clean();//limpiamos el almacenamiento
 
-    include __DIR__ . "/views/layout.php";
+    include_once __DIR__ . "/views/layout.php";
   }
 }

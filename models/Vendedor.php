@@ -21,13 +21,13 @@ class Vendedor extends ActiveRecord {
 
   public function validar()
   {
-    if (!$this->titulo) {
+    if (!$this->nombre) {
       self::$errores['nombre'] = "Nombre Obligatorio";
     }
-    if (!$this->titulo) {
+    if (!$this->apellido) {
       self::$errores['apellido'] = "Apellido Obligatorio";
     }
-    if (!$this->titulo) {
+    if (!$this->telefono) {
       self::$errores['telefono'] = "Telefono Obligatorio";
     }
     if (!preg_match('/[0-9]{10}/', $this->telefono)) {

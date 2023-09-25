@@ -33,6 +33,7 @@ class ActiveRecord {
     $query .= " ) VALUES (' ";
     $query .= join("', '", array_values($atributos));
     $query .= " '); ";
+
     $resultado = self::$db->query($query);
 
     //mensaje de exito
@@ -45,13 +46,11 @@ class ActiveRecord {
   public function actualizar() {
     //sanitizar datos
     $atributos = $this->sanitizarDatos();
-
     $valores = [];
 
     foreach ($atributos as $key => $value) {
       $valores[] = "{$key} = '{$value}'";
     }
-
     $query = "UPDATE " . static::$tabla . " SET ";
     $query .= join(', ', $valores);
     $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";

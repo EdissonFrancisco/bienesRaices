@@ -1,15 +1,13 @@
 <?php
+  if (!isset($_SESSION)) {
+    session_start();
+  }
 
-if (isset($_SESSION)) {
-  session_start();
-}
+  $auth = $_SESSION['login'] ?? false;
 
-$auth = $_SESSION['login'] ?? false;
-
-if (isset($inicio)) {
-  $inicio = false;
-}
-
+  if(!isset($inicio)) {
+    $inicio = false;
+  }
 ?>
 
 <!doctype html>
@@ -28,7 +26,7 @@ if (isset($inicio)) {
   <header class="header <?php echo $inicio ? 'inicio' : ''; ?> ">
     <div class="contenedor contenido-header">
       <div class="barra">
-        <a href="/../../index.php">
+        <a href="/">
           <img class="imagen-logo" src="/../../build/img/logo.svg" alt="logotipo Bienes raices">
         </a>
         <div class="mobile-menu">
@@ -37,15 +35,15 @@ if (isset($inicio)) {
         <div class="derecha">
           <img class="dark-mode-boton" src="/../../build/img/dark-mode.svg" alt="boton modo oscuro">
           <nav class="navegacion">
-            <a href="/../../nosotros.php">Nosotros</a>
-            <a href="/../../anuncios.php">Anuncios</a>
-            <a href="/../../blog.php">blog</a>
-            <a href="/../../contacto.php">Contacto</a>
-            <?php if ($auth) { ?>
-              <a href="/../../cerrarSesion.php">Cerrar Sesion</a>
-            <?php } else if (!$auth) { ?>
-              <a href="/../../login.php">Iniciar Sesion</a>
-            <?php } ?>
+            <a href="/nosotros">Nosotros</a>
+            <a href="/propiedades">Anuncios</a>
+            <a href="/blog">blog</a>
+            <a href="/contacto">Contacto</a>
+            <?php if ($auth) {  ?>
+              <a href="/logout">Cerrar Sesion</a>
+            <?php } else if(!$auth) { ?>
+              <a href="/login">Iniciar Sesion</a>
+            <?php }?>
           </nav>
         </div>
       </div><!--.barra -->
@@ -61,10 +59,10 @@ if (isset($inicio)) {
   <footer class="footer seccion">
     <div class="contenedor contenedor-footer">
       <nav class="navegacion">
-        <a href="/../../nosotros.php">Nosotros</a>
-        <a href="/../../anuncios.php">Anuncios</a>
-        <a href="/../../blog.php">blog</a>
-        <a href="/../../contacto.php">Contacto</a>
+        <a href="/nosotros">Nosotros</a>
+        <a href="/propiedades">Anuncios</a>
+        <a href="/blog">blog</a>
+        <a href="/contacto">Contacto</a>
       </nav>
     </div>
 
